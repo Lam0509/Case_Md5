@@ -28,9 +28,7 @@ export class Shipper {
     @Column({ type: "varchar", length: 10 })
     public phone: string;
 
-    @Column({ type: "bit",
-        transformer: { from: (v: Buffer) => !!v?.readInt8(0), to: (v) => v },
-    })
+    @Column({ type: "boolean", default: 0 })
     public status: boolean;
 
     @OneToMany(type => Order, order => order.shipper)

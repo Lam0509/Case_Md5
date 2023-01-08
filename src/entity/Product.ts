@@ -26,6 +26,9 @@ export class Product {
     @Column({ type: "int" })
     public quantity: number;
 
+    @Column({ type: "boolean", default: 1 })
+    public status: boolean;
+
     @ManyToMany(type => Category, category => category.products)
     @JoinTable({name: 'productCategories'})
     categories: Category[]

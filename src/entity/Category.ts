@@ -15,6 +15,9 @@ export class Category {
     @Column({ type: "varchar", length: 45 })
     public name: string;
 
+    @Column({ type: "varchar", length: 255 })
+    public description: string;
+
     @ManyToMany(type => Product, product => product.categories)
     products: Product[]
 
