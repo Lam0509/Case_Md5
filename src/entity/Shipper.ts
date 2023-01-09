@@ -4,7 +4,7 @@ import {
     PrimaryGeneratedColumn,
 } from "typeorm";
 import {Order} from "./Order";
-import {Gender} from "./Admin";
+import {Gender} from "./User";
 
 @Entity()
 
