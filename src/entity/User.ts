@@ -5,7 +5,9 @@ import {
 } from "typeorm";
 import {Assessment} from "./Assessment";
 import {Order} from "./Order";
-import {Gender} from "./Admin";
+
+export type Gender = 'Nam' | 'Nữ' | 'Giới tính khác';
+type Role = 'admin' | 'user'
 
 @Entity()
 
@@ -37,6 +39,9 @@ export class User {
 
     @Column({ type: 'varchar', length: 255 })
     public password: string;
+
+    @Column({ type: "enum", enum: ['admin', 'user'], default: 'user'})
+    public role: Role;
 
     @OneToMany(type => Assessment, assessment => assessment.user)
     assessments: Assessment[]
