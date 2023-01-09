@@ -21,7 +21,11 @@ class AssessmentController {
 
     // Bên user
     async add(req, res) {
+        await assessmentRepository.createQueryBuilder('assessment')
 
+        res.json({
+            message: 'Add successfully!!!'
+        })
     }
 
     // Bên user
