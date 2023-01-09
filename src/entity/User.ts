@@ -35,7 +35,7 @@ export class User {
     @Column({ type: "varchar", length: 45 })
     public email: string;
 
-    @Column({ type: 'varchar', length: 45 })
+    @Column({ type: 'varchar', length: 255 })
     public password: string;
 
     @OneToMany(type => Assessment, assessment => assessment.user)
