@@ -15,4 +15,6 @@ router.get('/detail/:id', productController.showProductDetail);
 
 router.get('/search', productController.search)
 
+router.get('/status', productController.getAllStatus)
+
 export default router
