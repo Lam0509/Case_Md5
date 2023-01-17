@@ -11,4 +11,11 @@ router.get('/detail/:id', orderController.showOrderDetail);
 
 router.get('/search', orderController.search);
 
+router.get('/status', orderController.getStatus);
+
+router.put('/detail/:id', orderController.update);
+
 export default router;
+
+
+

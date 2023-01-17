@@ -215,7 +215,6 @@ app.get('/admin/reports/chart', async (req, res) => {
         orders: orders,
         users: users
     })
-
 })
 
 app.listen(PORT, () => {
