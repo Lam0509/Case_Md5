@@ -6,30 +6,13 @@ const orderRepository = AppDataSource.getRepository(Order);
 const orderDetailRepository = AppDataSource.getRepository(OrderDetail);
 
 class OrderController {
-    async showList(req, res) {
-        const orders = await orderDetailRepository.createQueryBuilder('order_detail')
-            .innerJoin('order_detail.order', 'order')
-            .innerJoin('order.user', 'user')
-            .innerJoin('order.shipper', 'shipper')
-            .innerJoin('order_detail.product', 'product')
-            .select('order.id, order.date, order.status')
-            .addSelect('user.name', 'user_name')
-            .addSelect('shipper.name', 'shipper_name')
-            .addSelect('SUM(order_detail.quantity * product.price)', 'total_Money')
-            .groupBy('order.id')
-            .orderBy('order.date', 'DESC')
-            .getRawMany()
-
-        res.status(200).json(orders)
-    }
-
     // Bên user
     async add(req, res) {
 
     }
 
+    // Đã dùng
     async showOrderDetail(req, res) {
-
         const id = +req.params.id;
         const orderDetail = await orderDetailRepository.createQueryBuilder('order_detail')
             .innerJoin('order_detail.order', 'order')
@@ -41,6 +24,7 @@ class OrderController {
         res.status(200).json(orderDetail);
     }
 
+    // Đã dùng
     async search(req, res) {
         let date = req.query.date;
         let status = req.query.status;
@@ -59,11 +43,11 @@ class OrderController {
         if (user && user !== '') {
             query.andWhere('user.name LIKE :name', {name: `%${user}%`})
         }
-        const orders = await query.getRawMany();
+        const orders = await query.orderBy('order.id', 'ASC').getRawMany();
         res.status(200).json(orders)
     }
 
-    // Lấy hết status
+    // Lấy hết status // Đã dùng
     async getStatus(req, res) {
         const allStatus = await orderRepository.createQueryBuilder('order')
             .select('DISTINCT(order.status) as status')
@@ -71,6 +55,7 @@ class OrderController {
         res.json(allStatus);
     }
 
+    // Đã dùng
     async update(req, res) {
         await orderRepository.createQueryBuilder('order')
             .update()

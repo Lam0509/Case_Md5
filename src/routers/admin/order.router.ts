@@ -3,8 +3,6 @@ import orderController from "../../controllers/admin/order.controller";
 
 const router = Router();
 
-router.get('/', orderController.showList);
-
 router.post('/add', orderController.add);
 
 router.get('/detail/:id', orderController.showOrderDetail);

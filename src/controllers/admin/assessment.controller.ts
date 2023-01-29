@@ -65,6 +65,7 @@ class AssessmentController {
         const assessments = await query.orderBy('assessment.id', 'ASC').getRawMany();
         res.status(200).json(assessments)
     }
+
 }
 
 const assessmentController = new AssessmentController();
