@@ -29,6 +29,9 @@ export class Product {
     @Column({ type: "boolean", default: 1 })
     public status: boolean;
 
+    @Column({ type: "longtext", default: null })
+    public description: string;
+
     @ManyToMany(type => Category, category => category.products)
     @JoinTable({name: 'productCategories'})
     categories: Category[]
