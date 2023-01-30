@@ -66,17 +66,15 @@ class AuthController {
                     expiresIn: 60 * 60 * 24
                 });
 
-                res.cookie('token', token, {
-                    httpOnly: true,
-                    maxAge: 60 * 60 * 1000
-                });
                 if (user.role == 'admin') {
                     return res.status(200).json({
-                        title: 'This is admin page'
+                        title: 'This is admin page',
+                        token
                     });
                 } else {
                     return res.status(200).json({
-                        title: 'This is user page'
+                        title: 'This is user page',
+                        token
                     });
                 }
 
@@ -107,7 +105,7 @@ class AuthController {
     }
     async logout(req, res) {
         try {
-            res.clearCookie('token');
+            res.clear('token');
             res.json({title: 'logout successfully'});
         } catch (err) {
             res.status(400).json({err: err})
