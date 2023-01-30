@@ -13,6 +13,7 @@ import fileUpload from "express-fileupload";
 import {OrderDetail} from "./src/entity/OrderDetail";
 import {Order} from "./src/entity/Order";
 import {Assessment} from "./src/entity/Assessment";
+import authRouter from "./src/routers/auth.router";
 
 AppDataSource
     .initialize()
@@ -43,6 +44,7 @@ app.use('/admin/shipper', adminShipperRouter);
 app.use('/admin/assessment', adminAssessmentRouter);
 app.use('/admin/user', adminUserRouter);
 app.use('/admin/dashboard', adminDashboardRouter);
+app.use('/',authRouter);
 
 // Dashboard
 

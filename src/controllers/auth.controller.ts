@@ -104,7 +104,7 @@ class AuthController {
     }
     async logout(req, res) {
         try {
-            res.clearCookie('token');
+            res.clear('token');
             res.json({title: 'logout successfully'});
         } catch (err) {
             res.status(400).json({err: err})

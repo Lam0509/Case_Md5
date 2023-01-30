@@ -9,6 +9,7 @@ class UserController {
         res.status(200).json(users)
     }
 
+
     // Bên user thêm sau khi đăng ký
     async add(req, res) {
         await userRepository.save({...req.body, image: req.files.image.name})

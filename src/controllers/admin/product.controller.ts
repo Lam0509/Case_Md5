@@ -2,7 +2,7 @@ import {AppDataSource} from "../../data-source";
 import {Product} from "../../entity/Product";
 import {Assessment} from "../../entity/Assessment";
 const productRepository = AppDataSource.getRepository(Product)
-const assessmentRepository = AppDataSource.getRepository(Assessment)
+const assessmentRepository = AppDataSource.getRepository(Assessment);
 
 class ProductController {
 
@@ -107,9 +107,10 @@ class ProductController {
         res.json(allStatus)
     }
 
-    // Đã dùng
     async showProductDetail(req, res) {
+        console.log(1)
         let id = req.params.id;
+        console.log(id)
         const product = await productRepository.findOneBy({id: id})
         const categories = await productRepository.createQueryBuilder()
             .relation(Product, "categories")
@@ -129,6 +130,7 @@ class ProductController {
             assessment: assessment
         });
     }
+
 
 }
 
