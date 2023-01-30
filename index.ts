@@ -7,6 +7,7 @@ import adminShipperRouter from "./src/routers/admin/shipper.router"
 import adminAssessmentRouter from "./src/routers/admin/assessment.router"
 import adminUserRouter from "./src/routers/admin/user.router"
 import adminDashboardRouter from "./src/routers/admin/dashboard.router"
+import adminAuthRouter from "./src/routers/auth.router"
 const PORT = 8000;
 import fileUpload from "express-fileupload";
 import {OrderDetail} from "./src/entity/OrderDetail";
@@ -34,6 +35,7 @@ app.use(fileUpload({
     createParentPath: true
 }))
 app.use(express.json());
+app.use('/', adminAuthRouter)
 app.use('/admin/product', adminProductRouter)
 app.use('/admin/order', adminOrderRouter)
 app.use('/admin/category', adminCategoryRouter)

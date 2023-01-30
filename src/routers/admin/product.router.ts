@@ -13,4 +13,6 @@ router.get('/search', productController.search)
 
 router.get('/status', productController.getAllStatus)
 
+router.get('/detail/:id', productController.showProductDetail)
+
 export default router
