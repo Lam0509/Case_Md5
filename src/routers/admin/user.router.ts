@@ -9,6 +9,6 @@ router.post('/add', userController.add);
 
 router.post('/update/:id', userController.update);
 
-router.get('/detail/:id', userController.showUserDetail);
+router.get('/detail', userController.showUserDetail);
 
 export default router;

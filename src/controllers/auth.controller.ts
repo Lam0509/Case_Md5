@@ -77,7 +77,6 @@ class AuthController {
                         token
                     });
                 }
-
             }
 
         } catch (err) {
