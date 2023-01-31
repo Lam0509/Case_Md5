@@ -14,6 +14,7 @@ import {OrderDetail} from "./src/entity/OrderDetail";
 import {Order} from "./src/entity/Order";
 import {Assessment} from "./src/entity/Assessment";
 import authRouter from "./src/routers/auth.router";
+import jwt from "jsonwebtoken";
 
 AppDataSource
     .initialize()
@@ -507,6 +508,26 @@ app.get('/admin/reports/years', async (req, res) => {
         .execute()
 
     res.json(result)
+})
+
+app.get('/test', async (req, res) => {
+    try {
+        let tokenUser = req.query.token;
+        if (tokenUser) {
+            jwt.verify(tokenUser.toString(), "123456789", (err, decoded) => {
+                if (err) {
+                    res.status(401).json({ message: err.message });
+                } else {
+                    res.status(200).json(decoded)
+                }
+            });
+        } else {
+            res.status(401).json({ message: "token doesn't exist" });
+        }
+
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 })
 
 app.listen(PORT, () => {

@@ -13,6 +13,8 @@ router.get('/status', orderController.getStatus);
 
 router.put('/detail/:id', orderController.update);
 
+router.get('/delete/:id', orderController.delete);
+
 export default router;
 
 

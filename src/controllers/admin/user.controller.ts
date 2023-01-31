@@ -1,7 +1,10 @@
 import {User} from "../../entity/User";
 import {AppDataSource} from "../../data-source";
+import jwt from "jsonwebtoken";
+import {Order} from "../../entity/Order";
 
 const userRepository = AppDataSource.getRepository(User);
+const orderRepository = AppDataSource.getRepository(Order);
 
 class UserController {
     async showList(req, res) {
@@ -31,13 +34,34 @@ class UserController {
         })
     }
 
+    // Đã dùng
     async showUserDetail(req, res) {
-        const userId = req.params.id;
-        const user = await userRepository.findOneBy({id: userId});
-        res.status(200).json(user)
+        let tokenUser = req.query.token;
+        console.log(tokenUser)
+        jwt.verify(tokenUser.toString(), "123456789", async (err, decoded) => {
+            if (err) {
+                res.status(401).json({ message: err.message });
+            } else {
+                let userId = decoded.user_id;
+                const userInfo = await userRepository.find({
+                    relations: {
+                        orders: {
+                            orderDetails: {
+                                product: true
+                            }
+                        }
+                    },
+                    where: {
+                        id: userId
+                    }
+                })
+                res.json(userInfo)
+            }
+        });
     }
 }
 
 const userController = new UserController();
 
 export default userController
+
