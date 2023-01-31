@@ -108,7 +108,6 @@ class ProductController {
     }
 
     async showProductDetail(req, res) {
-        console.log(1)
         let id = req.params.id;
         console.log(id)
         const product = await productRepository.findOneBy({id: id})

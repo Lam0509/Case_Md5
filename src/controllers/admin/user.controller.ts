@@ -46,6 +46,7 @@ class UserController {
                 const userInfo = await userRepository.find({
                     relations: {
                         orders: {
+                            shipper: true,
                             orderDetails: {
                                 product: true
                             }
